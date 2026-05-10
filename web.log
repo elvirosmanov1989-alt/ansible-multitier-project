@@ -1,0 +1,24 @@
+
+PLAY [Configure Web Server] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [web1]
+
+TASK [security : Disable empty passwords] **************************************
+ok: [web1]
+
+TASK [Install Apache and Git on Ubuntu] ****************************************
+ok: [web1]
+
+TASK [Start Apache] ************************************************************
+ok: [web1]
+
+TASK [Clone application repository] ********************************************
+ok: [web1]
+
+TASK [Copy application homepage] ***********************************************
+ok: [web1]
+
+PLAY RECAP *********************************************************************
+web1                       : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

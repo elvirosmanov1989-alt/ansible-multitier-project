@@ -1,0 +1,26 @@
+---
+- name: Configure Load Balancer
+  hosts: load_balancer
+  become: yes
+
+  roles:
+    - geerlingguy.nginx
+    - security
+
+  tasks:
+
+    - name: Deploy nginx configuration
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+
+    - name: Reload nginx
+      service:
+        name: nginx
+        state: reloaded
+      register: nginx_reload
+
+    - name: Notify if nginx reload failed
+      debug:
+        msg: "Nginx reload failed!"
+      when: nginx_reload.failed

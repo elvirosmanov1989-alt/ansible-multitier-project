@@ -1,0 +1,50 @@
+---
+- name: Configure Web Server
+  hosts: web_servers
+  become: yes
+
+  roles:
+    - security
+
+  tasks:
+
+    - name: Install Apache and Git on Ubuntu
+      apt:
+        name:
+          - apache2
+          - git
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Start Apache
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+      when: ansible_os_family == "Debian"
+
+    - block:
+
+        - name: Clone application repository
+          git:
+            repo: "https://github.com/cloudacademy/static-website-example.git"
+            dest: /var/www/html/app
+          register: git_clone_result
+
+        - name: Copy application homepage
+          copy:
+            src: /var/www/html/app/index.html
+            dest: /var/www/html/index.html
+            remote_src: yes
+
+      rescue:
+
+        - name: Rollback deployment
+          file:
+            path: /var/www/html/app
+            state: absent
+
+        - name: Rollback message
+          debug:
+            msg: "Application deployment failed. Rollback completed."

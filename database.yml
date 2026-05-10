@@ -1,0 +1,23 @@
+---
+- name: Configure Database Server
+  hosts: database
+  become: yes
+
+  vars_files:
+    - group_vars/database.yml
+
+  vars:
+    mysql_root_password_update: true
+    mysql_root_use_socket: true
+
+  pre_tasks:
+
+    - name: Install MySQL Python package on RHEL
+      dnf:
+        name: python3-PyMySQL
+        state: present
+      when: ansible_os_family == "RedHat"
+
+  roles:
+    - geerlingguy.mysql
+    - security

@@ -1,0 +1,78 @@
+
+PLAY [Configure Load Balancer] *************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [lb1]
+
+TASK [geerlingguy.nginx : Include OS-specific variables.] **********************
+ok: [lb1]
+
+TASK [geerlingguy.nginx : Define nginx_user.] **********************************
+ok: [lb1]
+
+TASK [geerlingguy.nginx : include_tasks] ***************************************
+included: /home/ansible-task/roles/geerlingguy.nginx/tasks/setup-RedHat.yml for lb1
+
+TASK [geerlingguy.nginx : Enable nginx repo.] **********************************
+ok: [lb1]
+
+TASK [geerlingguy.nginx : Ensure nginx is installed.] **************************
+ok: [lb1]
+
+TASK [geerlingguy.nginx : include_tasks] ***************************************
+skipping: [lb1]
+
+TASK [geerlingguy.nginx : include_tasks] ***************************************
+skipping: [lb1]
+
+TASK [geerlingguy.nginx : include_tasks] ***************************************
+skipping: [lb1]
+
+TASK [geerlingguy.nginx : include_tasks] ***************************************
+skipping: [lb1]
+
+TASK [geerlingguy.nginx : include_tasks] ***************************************
+skipping: [lb1]
+
+TASK [geerlingguy.nginx : include_tasks] ***************************************
+skipping: [lb1]
+
+TASK [geerlingguy.nginx : Remove default nginx vhost config file (if configured).] ***
+skipping: [lb1]
+
+TASK [geerlingguy.nginx : Ensure nginx_vhost_path exists.] *********************
+ok: [lb1]
+
+TASK [geerlingguy.nginx : Add managed vhost config files.] *********************
+skipping: [lb1]
+
+TASK [geerlingguy.nginx : Remove managed vhost config files.] ******************
+skipping: [lb1]
+
+TASK [geerlingguy.nginx : Remove legacy vhosts.conf file.] *********************
+ok: [lb1]
+
+TASK [geerlingguy.nginx : Copy nginx configuration in place.] ******************
+changed: [lb1]
+
+TASK [geerlingguy.nginx : Ensure nginx service is running as configured.] ******
+ok: [lb1]
+
+TASK [security : Disable empty passwords] **************************************
+ok: [lb1]
+
+TASK [Deploy nginx configuration] **********************************************
+changed: [lb1]
+
+TASK [Reload nginx] ************************************************************
+changed: [lb1]
+
+TASK [Notify if nginx reload failed] *******************************************
+skipping: [lb1]
+
+RUNNING HANDLER [geerlingguy.nginx : reload nginx] *****************************
+changed: [lb1]
+
+PLAY RECAP *********************************************************************
+lb1                        : ok=14   changed=4    unreachable=0    failed=0    skipped=10   rescued=0    ignored=0   
+
